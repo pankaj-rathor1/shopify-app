@@ -1,19 +1,24 @@
 # Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
 
-name = "my-app"
 client_id = "1e70400b0f4e4dc4177844f18e5746c3"
-application_url = "https://robert-ruling-decide-genome.trycloudflare.com"
+name = "my-app"
+application_url = "https://lodge-stockings-behavior-spending.trycloudflare.com"
 embedded = true
+
+[build]
+automatically_update_urls_on_dev = true
+dev_store_url = "test-webential-store.myshopify.com"
+include_config_on_deploy = true
 
 [access_scopes]
 # Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
-scopes = "write_products,read_products,read_inventory,write_inventory, write_customers"
+scopes = "write_products,read_products,read_inventory,write_inventory,read_customers,write_customers"
 
 [auth]
 redirect_urls = [
-  "https://robert-ruling-decide-genome.trycloudflare.com/auth/callback",
-  "https://robert-ruling-decide-genome.trycloudflare.com/auth/shopify/callback",
-  "https://robert-ruling-decide-genome.trycloudflare.com/api/auth/callback"
+  "https://lodge-stockings-behavior-spending.trycloudflare.com/auth/callback",
+  "https://lodge-stockings-behavior-spending.trycloudflare.com/auth/shopify/callback",
+  "https://lodge-stockings-behavior-spending.trycloudflare.com/api/auth/callback"
 ]
 
 [webhooks]
@@ -21,7 +26,3 @@ api_version = "2024-01"
 
 [pos]
 embedded = false
-
-[build]
-automatically_update_urls_on_dev = true
-dev_store_url = "test-webential-store.myshopify.com"
