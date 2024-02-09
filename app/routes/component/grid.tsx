@@ -10,12 +10,16 @@ import {
     RangeSlider,
     Badge,
     useBreakpoints,
+    Link,
+    Tag,
   } from '@shopify/polaris';
   import type {IndexFiltersProps, TabProps} from '@shopify/polaris';
+import { url } from 'inspector';
   import {useState, useCallback} from 'react';
   
-  export function IndexTableWithViewsSearchFilterSorting(orderData:any) {
-    const orders:any = orderData;
+  export function IndexTableWithViewsSearchFilterSorting(customerData:any) {
+    
+    const customers:any = customerData;
 
     const sleep = (ms: number) =>
       new Promise((resolve) => setTimeout(resolve, ms));
@@ -94,8 +98,8 @@ import {
       return true;
     };
     const sortOptions: IndexFiltersProps['sortOptions'] = [
-      {label: 'Order', value: 'order asc', directionLabel: 'Ascending'},
-      {label: 'Order', value: 'order desc', directionLabel: 'Descending'},
+      {label: 'Order', value: 'customer asc', directionLabel: 'Ascending'},
+      {label: 'Order', value: 'customer desc', directionLabel: 'Descending'},
       {label: 'Customer', value: 'customer asc', directionLabel: 'A-Z'},
       {label: 'Customer', value: 'customer desc', directionLabel: 'Z-A'},
       {label: 'Date', value: 'date asc', directionLabel: 'A-Z'},
@@ -103,7 +107,7 @@ import {
       {label: 'Total', value: 'total asc', directionLabel: 'Ascending'},
       {label: 'Total', value: 'total desc', directionLabel: 'Descending'},
     ];
-    const [sortSelected, setSortSelected] = useState(['order asc']);
+    const [sortSelected, setSortSelected] = useState(['customer asc']);
     const {mode, setMode} = useSetIndexFiltersMode();
     const onHandleCancel = () => {};
   
@@ -254,16 +258,16 @@ import {
     }
   
     const resourceName = {
-      singular: 'order',
-      plural: 'orders',
+      singular: 'customer',
+      plural: 'customers',
     };
   
     const {selectedResources, allResourcesSelected, handleSelectionChange} =
-      useIndexResourceState(orders);
+      useIndexResourceState(customers);
   
-    const rowMarkup = orders.map(
+    const rowMarkup = customers.map(
       (
-        {id, customer, date, firstname, lastname, total, paymentStatus, fulfillmentStatus},
+        {id, date, customerName, loyaltyPoint, loyaltyStatus},
         index,
       ) => (
         <IndexTable.Row
@@ -271,21 +275,24 @@ import {
           key={id}
           selected={selectedResources.includes(id)}
           position={index}
+          disabled
         >
           <IndexTable.Cell>
-            <Text variant="bodyMd" fontWeight="bold" as="span">
-              {customer}
+          <Link
+            url={'https://admin.shopify.com/store/test-webential-store/customers/7683519021377'}
+            target={'_blank'}
+          >
+            <Text fontWeight="bold" as="span">
+              {customerName}
             </Text>
+          </Link>
           </IndexTable.Cell>
-          <IndexTable.Cell>{firstname}</IndexTable.Cell>
-          <IndexTable.Cell>{lastname}</IndexTable.Cell>
           <IndexTable.Cell>
             <Text as="span" numeric>
-              {total}
+              {loyaltyPoint}
             </Text>
           </IndexTable.Cell>
-          <IndexTable.Cell>{paymentStatus}</IndexTable.Cell>
-          <IndexTable.Cell>{fulfillmentStatus}</IndexTable.Cell>
+          <IndexTable.Cell>{loyaltyStatus}</IndexTable.Cell>
           <IndexTable.Cell>{date}</IndexTable.Cell>
         </IndexTable.Row>
       ),
@@ -321,18 +328,15 @@ import {
         <IndexTable
           condensed={useBreakpoints().smDown}
           resourceName={resourceName}
-          itemCount={orders.length}
+          itemCount={customers.length}
           selectedItemsCount={
             allResourcesSelected ? 'All' : selectedResources.length
           }
           onSelectionChange={handleSelectionChange}
           headings={[
-            {title: 'Customer'},
-            {title: 'First Name'},
-            {title: 'Last Name'},
+            {title: 'Customer Name'},
             {title: 'Loyalty Point'},
             {title: 'Loyalty status'},
-            {title: 'status'},
             {title: 'Date'},
           ]}
         >

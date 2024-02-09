@@ -1,0 +1,29 @@
+# Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
+
+client_id = "96f8c1ef9d6879ef06a7cb848d70c84b"
+name = "Loyalty Point"
+handle = "loyalty-point-2"
+application_url = "https://vendors-und-cutting-chelsea.trycloudflare.com"
+embedded = true
+
+[build]
+automatically_update_urls_on_dev = true
+dev_store_url = "test-webential-store.myshopify.com"
+include_config_on_deploy = true
+
+[access_scopes]
+# Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
+scopes = ""
+
+[auth]
+redirect_urls = [
+  "https://vendors-und-cutting-chelsea.trycloudflare.com/auth/callback",
+  "https://vendors-und-cutting-chelsea.trycloudflare.com/auth/shopify/callback",
+  "https://vendors-und-cutting-chelsea.trycloudflare.com/api/auth/callback"
+]
+
+[webhooks]
+api_version = "2024-01"
+
+[pos]
+embedded = false
